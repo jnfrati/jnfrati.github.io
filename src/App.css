@@ -1,0 +1,321 @@
+/*Profile photo pallete of colors*/
+:root{
+    --bg-color:#0b0c10;
+    --header-color:linear-gradient(to bottom right,#242582,black);
+    --profile-name-color:#66fcf1;
+    --profile-desc-color:#45a29e;
+    
+    --card-bg: none;
+    --card-title-bg: none;
+    --card-title-color:#45a29e;
+    --card-content-color:#c5c6c7;
+    
+    --floating-list-color:white;
+    
+    --footer-color:black;
+    --footer-text:#f64c72;
+  }
+  
+  
+  html, body, #app{
+    margin: 0px;
+    padding: 0px;
+    overflow: auto;
+    height: 100%;
+  }
+  
+  #app {
+    background: var(--bg-color)  /*linear-gradient(to bottom right,#f5b3a6, #190061)*/;
+    background-attachment: fixed;
+    font-family: 'Roboto Slab', serif;
+    font-size: 10px;
+  }
+  #app>img {
+    display: none;
+    position:fixed;
+    top: 10px;
+    left: 10px;
+  }
+  #app>img:hover {
+    animation: rotation 1.5s infinite ease-in-out;
+  }
+  footer{
+    height: min-content;
+    font-size: 1rem;
+    text-align: center;
+  }
+  footer p{
+    padding-top: 10px;
+    color:var(--footer-text);
+  }
+  .container{
+    margin: 20px auto;
+    padding: 0px;
+    width: 85%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    grid-template-areas:  "whoami"
+                          "commonlink";
+    row-gap: 30px;
+  }
+  
+  #profile {
+    width: 100%;
+    text-align: center;
+    font-size: 1.6rem;
+    padding: 20px 0px; 
+  }
+  #profileDescription{
+    grid-area: profileDesc;
+    line-height:10px;
+    margin-bottom: 20px;
+    color: var(--profile-name-color);
+  }
+  #profileDescription span{
+    color: var(--profile-desc-color);
+    font-size: 1.45rem;
+  }
+  #profileDescription a{
+    border: 1px solid var(--profile-desc-color);
+    display: block;
+    border-radius: 5px;
+    color: var(--profile-desc-color);
+    font-size: 1.20rem;
+    transition: ease-in .5s background, color;
+    margin: 15px auto;
+    width: max-content;
+    max-width: 200px;
+    padding: 6px;
+    text-align: center;
+    text-decoration: none;
+  }
+  #profileDescription a i{
+    margin-left: 6px;
+  }
+  #profileDescription a:hover{
+    background: var(--profile-desc-color);
+    color: black;
+  }
+  #profilePhoto {
+    grid-area: profilePhoto;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+  
+  .box {
+    display:block;
+    margin: 0px auto;
+    width: 100%;
+    max-width: 400px;
+    background: var(--card-bg)/*#fff1e5*/;
+    border-radius: 10px;
+  }
+  .box .box-title{
+    font-family: 'Kodchasan';
+    letter-spacing: 5px;
+    word-spacing: 3px;
+    text-align: center;
+    border-bottom: 2px solid;
+    height: 10%;
+    padding: 1px;
+    font-size: 1.3rem;
+    background: var(--card-title-bg); /*#f68d4c*/
+    color: var(--card-title-color);
+  }
+  .box .box-content{
+    font-size: 1.2rem;
+    font-family: 'Monserrat';
+    letter-spacing: 1px;
+    margin: 10px;
+    padding-bottom: 3px;
+    color:var(--card-content-color);
+  }
+  
+  .work-cards{
+    display:grid;
+    margin: 0 auto;
+    width: 90%;
+  }
+  .project-box{
+    margin: 10px auto;
+    min-width: nowrap;
+    width: 280px;
+    color: white;
+    border: 3px white solid;
+    text-align: center;
+  }
+  .project-box .box-title{
+    display: block;
+    letter-spacing: 5px;
+    font-size: 1.8em;
+    width: 100%;
+    color: var(--card-title-color);
+  }
+  .project-box .box-buttons{
+    margin: 10px;
+  }
+  .project-box .box-buttons a{
+    font-style: inherit;
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    border: 1px solid var(--card-title-color);
+    padding: 5px;
+    transition:ease 600ms background,color;
+  }
+  .project-box .box-buttons a:hover{
+    background: var(--card-title-color);
+    color: black;
+  }
+  .project-box .box-buttons a span{
+    margin: 5px;
+  }
+  
+  #whoAmIBox{
+     grid-area: whoami;
+     display: block;
+  }
+  #whoAmIBox .box-title{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+  #commonLinksBox{
+    grid-area: commonlink;
+    display: block;
+  }
+  #commonLinksBox .box-title{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+  
+  #floatingList{
+    position: fixed;
+    right: 5px;  
+  }
+  
+  #floatingList a{
+    font-size: 1.4rem;
+    display: block;
+    line-height:normal;
+    margin: 5px; 
+    
+  }
+  #floatingList a:hover{
+    cursor: pointer;
+
+  }
+  #floatingList span{
+    color: var(--floating-list-color);
+    transition: ease .4s color;
+  }
+  #floatingList span:hover{
+    color: var(--profile-name-color);
+  }
+  .divisor{
+    width: 100%;
+    height: 3px;
+    background: white;
+    color: white;
+    margin: 3em auto;
+    text-align: center;
+  }
+  .divisor span{
+    display: block;
+    font-size: 2em;
+    position: relative;
+    top: -2em;
+  }
+  .divisor i{
+    position: relative;
+    background: white;
+    color: black;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 4em;
+    margin: 0 auto;
+    display: block;
+    top: -40px;
+    transition: ease 500ms top;
+  }
+  .divisor i:hover{
+    top: -30px;
+  }
+  
+  @media (min-width:720px){
+    #profile{
+      display:grid;
+      grid-template-areas: 
+        "profilePhoto ."
+        "profilePhoto profileDesc"
+        "profilePhoto .";
+      column-gap: 0px;
+      row-gap: 0px;
+    }
+    #profileDescription{
+      text-align:left;
+    }
+    #profileDescription a{
+      margin: 15px 0px;
+    }
+    #floatingList a{
+      right: 15px;
+      font-size: 1.8rem;
+    }
+  .work-cards{
+      grid-template-columns: 1fr 1fr;
+    }
+    #app>img {
+      display: block;
+    }
+  }
+  @media (min-width:1024px){
+    
+    .container{
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:  
+                          "whoami . "
+                          ". commonlink";
+      column-gap: 0;
+      row-gap: 30px;
+    }
+  
+  #commonLinksBox .box-title{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+    
+  #whoAmIBox .box-title{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+    #floatingList a{
+      font-size: 2.2rem;
+      margin-right: 15px;
+    }
+  }
+  @media (min-width: 1372px){
+    .work-cards{
+      display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+  
+    }
+  }
+
+
+@keyframes rotation{
+  50%{
+    transform: rotate(180deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
