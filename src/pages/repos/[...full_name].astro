@@ -1,0 +1,52 @@
+---
+import { marked } from "marked";
+import PinnedRepo from "../../layouts/PinnedRepo.astro";
+import type { GHPinnedRepo, GHRepository } from "../../types";
+
+export async function getStaticPaths() {
+  const pinnedRepos: GHPinnedRepo[] = await fetch(
+    "https://gh-pinned-repos.egoist.dev/?username=jnfrati"
+  ).then((res) => res.json());
+
+  const ghResponse: GHRepository[] = await Promise.all(
+    pinnedRepos.map((repo) =>
+      fetch(`https://api.github.com/repos/${repo.owner}/${repo.repo}`, {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.GH_TOKEN}`,
+        },
+      }).then((res) => res.json())
+    )
+  );
+
+  const readmes = await Promise.all(
+    pinnedRepos.map((repo, i) =>
+      fetch(
+        `https://raw.githubusercontent.com/${repo.owner}/${repo.repo}/${ghResponse[i].default_branch}/README.md`,
+        {
+          headers: {
+            Authorization: `Bearer ${import.meta.env.GH_TOKEN}`,
+          },
+        }
+      ).then((res) => res.text())
+    )
+  );
+
+  return pinnedRepos.map((repo, i) => ({
+    params: { full_name: `${repo.owner}/${repo.repo}` },
+    props: {
+      repo: ghResponse[i],
+      readme: readmes[i],
+      title: `${repo.owner}/${repo.repo}`,
+    },
+  }));
+}
+export type Props = { repo: GHRepository; readme: string; title: string };
+
+const props = Astro.props;
+
+const content = marked.parse(props.readme);
+---
+
+<PinnedRepo {...props}>
+  <article set:html={content} />
+</PinnedRepo>

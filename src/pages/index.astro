@@ -1,0 +1,44 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header title={SITE_TITLE} />
+    <main>
+      <h1>Welcome to my personal site!</h1>
+      <p>
+        My name is Nicolas Frati, I'm a full stack developer (sort of), and I'm
+        glad to introduce you to my personal site.
+      </p>
+
+      <p>
+        I'm not very good at posting stuff, so this is just a try to overcome an
+        internal fear of mine. I hope you enjoy it!
+      </p>
+      <h2>Latest posts</h2>
+      <ul>
+        {
+          posts.map((post) => (
+            <li>
+              <a href={"/blog/" + post.slug}>{post.data.title}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <Footer />
+    </main>
+  </body>
+</html>
