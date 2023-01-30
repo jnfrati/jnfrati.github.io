@@ -40,7 +40,7 @@ export async function getStaticPaths() {
     },
   }));
 }
-export type Props = { repo: GHPinnedRepo; readme: string; title: string };
+export type Props = { repo: GHRepository; readme: string; title: string };
 
 const props = Astro.props;
 
