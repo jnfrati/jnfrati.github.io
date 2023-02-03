@@ -1,0 +1,43 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import { talks } from "../../content/talks/talks";
+
+export async function getStaticPaths() {
+  return talks.map((talk) => ({
+    params: { slug: talk.slug },
+    props: { talk },
+  }));
+}
+export type Props = { talk: (typeof talks)[number] };
+
+const props = Astro.props;
+
+let talk = props.talk;
+
+if (!talk.url) {
+  talk.url = "/talk-not-found";
+}
+---
+
+<head>
+  <meta http-equiv="refresh" content={`1;url=${props.talk.url}`} />
+</head>
+
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <meta http-equiv="refresh" content={`1;url=${talk.url}`} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section>
+        <h1>Redirecting to {talk.name}</h1>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
